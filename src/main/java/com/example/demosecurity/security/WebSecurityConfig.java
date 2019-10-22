@@ -12,5 +12,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	public void configure(WebSecurity web) throws Exception {
 		// Spring Securityのデバッグ出力を有効にする issues/6
 		web.debug(true);
+
+		// リソースファイルを認証対象外とする issues/7
+		web.ignoring().antMatchers("/resources/**");
 	}
 }
