@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 	>
 <head>
 <meta charset="UTF-8">
@@ -35,6 +36,14 @@
 				<li class="nav-item"><a class="nav-link" href="#"
 					th:href="@{/admin}" th:text="#{home.link.admin}">#{home.link.admin}</a></li>
 			</ul>
+			<!-- 画面に認証情報とログアウトボタンを表示する issues/4 -->
+			<div class="form-inline my-2 my-lg-0" sec:authorize="isAuthenticated()">
+				<span class="nav-itme" sec:authentication="principal.username">username</span>
+				<span class="nav-itme" sec:authentication="principal.authorities">authorities</span>
+				<form action="/logout" th:action="@{/logout}" method="post">
+					<button class="btn btn-lg btn-primary my-2 my-sm-0">logout</button>
+				</form>
+			</div>
 		</div>
 	</nav>
 	<div class="containter">
