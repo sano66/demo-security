@@ -1,11 +1,15 @@
 package com.example.demosecurity.security;
 
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
@@ -30,13 +34,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.logout().invalidateHttpSession(true).deleteCookies("JSESSIONID").permitAll();
 	}
 
+	@Autowired
+	private DataSource dataSource;
+
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		// 複数のユーザによる利用を可能にする issues/10
-		auth.inMemoryAuthentication()
-		.withUser("U001").password("{noop}P001").roles("USER")
-		.and().withUser("U002").password("{noop}P002").roles("USER").disabled(true)
-		.and().withUser("U003").password("{noop}P003").roles("USER", "ADMIN")
-		.and().withUser("A001").password("{noop}P001").roles("ADMIN");
+//		auth.inMemoryAuthentication()
+//		.withUser("U001").password("{noop}P001").roles("USER")
+//		.and().withUser("U002").password("{noop}P002").roles("USER").disabled(true)
+//		.and().withUser("U003").password("{noop}P003").roles("USER", "ADMIN")
+//		.and().withUser("A001").password("{noop}P001").roles("ADMIN");
+		// issues/11
+		auth.jdbcAuthentication().dataSource(dataSource).passwordEncoder(NoOpPasswordEncoder.getInstance());
 	}
 }
