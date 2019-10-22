@@ -1,6 +1,7 @@
 package com.example.demosecurity.security;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -16,4 +17,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		// リソースファイルを認証対象外とする issues/7
 		web.ignoring().antMatchers("/resources/**");
 	}
+
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		// ログアウト時にセッションを無効にし、クッキーを削除する issues/8
+		super.configure(http);
+		http.logout().invalidateHttpSession(true).deleteCookies("JSESSIONID").permitAll();
+	}
+
 }
