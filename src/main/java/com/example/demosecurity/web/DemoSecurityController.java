@@ -9,6 +9,8 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
@@ -69,9 +71,12 @@ public class DemoSecurityController {
 
 	@GetMapping("/ecBuy/{uuid}")
 	public String ecBuy(Model model, @PathVariable String uuid, @ModelAttribute EcForm ecForm
+			// Controllerから認証情報を参照する issues/5
+			, @AuthenticationPrincipal UserDetails userDetails
 			) {
 		ecForm.setBook(booksMap.get(uuid));
-		ecForm.setUsername("DUMMY_USER_NAME");
+		// Controllerから認証情報を参照する issues/5
+		ecForm.setUsername(userDetails.getUsername());
 		model.addAttribute(ecForm);
 		return "ecBuy";
 	}
