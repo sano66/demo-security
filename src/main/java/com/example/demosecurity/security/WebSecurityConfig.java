@@ -20,8 +20,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+		// 独自のログイン画面を使用する issues/9
+		http.authorizeRequests().anyRequest().authenticated();
+		http.formLogin().loginPage("/login").permitAll();
+
 		// ログアウト時にセッションを無効にし、クッキーを削除する issues/8
-		super.configure(http);
+		// super.configure(http);
 		http.logout().invalidateHttpSession(true).deleteCookies("JSESSIONID").permitAll();
 	}
 
