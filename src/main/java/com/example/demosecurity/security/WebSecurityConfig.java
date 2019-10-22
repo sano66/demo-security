@@ -1,6 +1,7 @@
 package com.example.demosecurity.security;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -29,4 +30,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.logout().invalidateHttpSession(true).deleteCookies("JSESSIONID").permitAll();
 	}
 
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		// 複数のユーザによる利用を可能にする issues/10
+		auth.inMemoryAuthentication()
+		.withUser("U001").password("{noop}P001").roles("USER")
+		.and().withUser("U002").password("{noop}P002").roles("USER").disabled(true)
+		.and().withUser("U003").password("{noop}P003").roles("USER", "ADMIN")
+		.and().withUser("A001").password("{noop}P001").roles("ADMIN");
+	}
 }
