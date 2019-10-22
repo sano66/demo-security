@@ -25,6 +25,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+		// 権限に応じてアクセスできるページを設定する issues/12
+		http.authorizeRequests().antMatchers("/ec", "/ecBuy/*").hasRole("USER");
+		http.authorizeRequests().antMatchers("/admin").hasRole("ADMIN");
+
 		// 独自のログイン画面を使用する issues/9
 		http.authorizeRequests().anyRequest().authenticated();
 		http.formLogin().loginPage("/login").permitAll();
