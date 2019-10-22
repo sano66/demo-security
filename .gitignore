@@ -1,0 +1,53 @@
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**
+!**/src/test/**
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+
+### VS Code ###
+.vscode/
+
+### MacOS ###
+.DS_Store
+
+### Image ###
+SnekoDSC03495.jpg
+SnekoDSC03495_TP_V.jpg
+TOMS526509.jpg
+TOMS526509_TP_V.jpg
+TOMS526526.jpg
+TOMS526526_TP_V.jpg
+kakurerukijishironeko171027.jpg
+kakurerukijishironeko171027_TP_V.jpg
+miagerukijineko171027.jpg
+miagerukijineko171027_TP_V.jpg
+nekosotomiru1027.jpg
+nekosotomiru1027_TP_V.jpg
+tom190303DSC03895.jpg
+tom190303DSC03895_TP_V.jpg
+tomcatDSC05027.jpg
+tomcatDSC05027_TP_V.jpg
+

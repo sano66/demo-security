@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout}">
+<head>
+<title th:text="#{5xx.title}">500</title>
+</head>
+<body>
+	<div class="container" layout:fragment="content">
+		<div class="jumbotron">
+			<h1 class="display-3" th:text="#{5xx.title} + 500">500</h1>
+			<p class="lead" th:text="#{5xx.desc}">This is a simple hero unit,
+				a simple jumbotron-style component for calling extra attention to
+				featured content or information.</p>
+			<hr class="my-4">
+			<img class="img-cat"
+				src="../../static/resources/images/error/kakurerukijishironeko171027_TP_V4.jpg"
+				th:src="@{/resources/images/error/kakurerukijishironeko171027_TP_V4.jpg}" />
+		</div>
+	</div>
+</body>
+</html>

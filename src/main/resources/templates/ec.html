@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout}">
+<head>
+<title th:text="#{ec.title}">#{ec.title}</title>
+</head>
+<body>
+	<div class="container" layout:fragment="content">
+		<p th:text="${message}">${message}</p>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<td th:text="#{ec.table.column.isbn13}">#{ec.table.column.isbn13}</td>
+					<td th:text="#{ec.table.column.author}">#{ec.table.column.author}</td>
+					<td th:text="#{ec.table.column.publisher}">#{ec.table.column.publisher}</td>
+					<td th:text="#{ec.table.column.title}">#{ec.table.column.title}</td>
+					<td th:text="#{ec.table.column.price}">#{ec.table.column.price}</td>
+					<td th:text="#{ec.table.column.issueDate}">#{ec.table.column.issueDate}</td>
+					<td th:text="#{ec.table.column.imageUrl}">#{ec.table.column.imageUrl}</td>
+					<td th:text="#{ec.table.button.buy}">#{ec.table.button.buy}</td>
+			</thead>
+			<tbody th:remove="all-but-first" th:each="book : ${bookList}">
+				<tr>
+					<td th:text="${book.isbn13}">${ec.table.column.isbn13}</td>
+					<td th:text="${book.author}">${ec.table.column.author}</td>
+					<td th:text="${book.publisher}">${book.publisher}</td>
+					<td th:text="${book.title}">${book.title}</td>
+					<td th:text="${#numbers.formatInteger(book.price, 3, 'COMMA')}">${book.price}</td>
+					<td th:text="${book.issueDate}">${book.issueDate}</td>
+					<td><img class="img-book"
+						src="../../static/resources/images/books.png"
+						th:src="${book.imageUrl}" /></td>
+					<td><a href="#" th:href="@{/ecBuy/{id}(id=${book.uuid})}"
+						class="btn btn-success" th:text="#{ec.table.button.buy}">#{ec.table.button.buy}</a></td>
+				</tr>
+				<tr>
+					<td>${ec.table.column.isbn13}</td>
+					<td>${ec.table.column.author}</td>
+					<td>${book.publisher}</td>
+					<td>${book.title}</td>
+					<td>${book.price}</td>
+					<td>${book.issueDate}</td>
+					<td><img src="../../static/resources/images/books.png" /></td>
+					<td><a href="#" class="btn btn-success">buy</a></td>
+				</tr>
+				<tr>
+					<td>${ec.table.column.isbn13}</td>
+					<td>${ec.table.column.author}</td>
+					<td>${book.publisher}</td>
+					<td>${book.title}</td>
+					<td>${book.price}</td>
+					<td>${book.issueDate}</td>
+					<td><img src="../../static/resources/images/books.png" /></td>
+					<td><a href="#" class="btn btn-success">buy</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

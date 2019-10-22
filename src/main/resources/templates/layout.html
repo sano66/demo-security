@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>layout.html</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="../../static/resources/css/demosecurity.css"
+	th:href="@{/resources/css/demosecurity.css}" />
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+		<a class="navbar-brand" href="#" th:href="@{/home}"
+			th:text="#{home.title}">#{home.title}</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarColor03" aria-controls="navbarColor03"
+			aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarColor03">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item"><a class="nav-link" href="#"
+					th:href="@{/ec}" th:text="#{home.link.ec}">#{home.link.ec}</a></li>
+				<li class="nav-item"><a class="nav-link" href="#"
+					th:href="@{/admin}" th:text="#{home.link.admin}">#{home.link.admin}</a></li>
+			</ul>
+		</div>
+	</nav>
+	<div class="containter">
+		<div layout:fragment="content">
+			<p>this is layout.html comment</p>
+		</div>
+		<hr class="my-4">
+		<div class="container">
+			<p class="lead" th:text="#{layout.footer.desc}">footer</p>
+		</div>
+	</div>
+</body>
+</html>
